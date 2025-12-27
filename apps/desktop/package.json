@@ -1,0 +1,20 @@
+{
+  "name": "@calendar/desktop",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"tsc -p tsconfig.json --watch\" \"wait-on dist/main.js dist/preload.js && electron dist/main.js\"",
+    "build": "tsc -p tsconfig.json",
+    "start": "electron dist/main.js"
+  },
+  "dependencies": {
+    "electron": "^30.0.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.15",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.5.4",
+    "wait-on": "^7.2.0"
+  }
+}
