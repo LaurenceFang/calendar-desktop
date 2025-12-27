@@ -3,6 +3,7 @@ import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 
 const devServerUrl = "http://localhost:5173";
+const APP_NAME = "Calendar Desktop";
 
 const ensureAppDirectories = () => {
   const userDataDir = app.getPath("userData");
@@ -39,7 +40,6 @@ const createWindow = () => {
 };
 
 const startApp = async () => {
-  const { APP_NAME } = await import("@calendar/shared");
   app.setName(APP_NAME);
   ensureAppDirectories();
   createWindow();
@@ -51,8 +51,13 @@ const startApp = async () => {
   });
 };
 
-app.whenReady().then(() => {
-  void startApp();
+app.whenReady().then(async () => {
+  try {
+    await startApp();
+  } catch (error) {
+    console.error("Failed to start desktop app.", error);
+    app.quit();
+  }
 });
 
 app.on("window-all-closed", () => {
