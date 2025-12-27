@@ -27,26 +27,34 @@ const env = {
   APP_USER_DATA_DIR: userDataDir
 };
 
-const npxCommand = process.platform === "win32" ? "npx.cmd" : "npx";
+const command =
+  'npx pnpm exec concurrently -k -n api,web,desktop -c "green,cyan,magenta" ' +
+  '"npx pnpm --filter @calendar/api dev" ' +
+  '"npx pnpm --filter @calendar/web dev" ' +
+  '"npx pnpm --filter @calendar/desktop dev"';
 
-const child = spawn(
-  npxCommand,
-  [
-    "pnpm",
-    "exec",
-    "concurrently",
-    "-k",
-    "-n",
-    "api,web,desktop",
-    "-c",
-    "green,cyan,magenta",
-    "pnpm --filter @calendar/api dev",
-    "pnpm --filter @calendar/web dev",
-    "pnpm --filter @calendar/desktop dev"
-  ],
-  { stdio: "inherit", env }
-);
+const child = spawn(command, {
+  shell: true,
+  stdio: "inherit",
+  env
+});
+
+const forwardSignal = (signal) => {
+  if (child.killed) {
+    return;
+  }
+
+  child.kill(signal);
+};
+
+process.on("SIGINT", () => forwardSignal("SIGINT"));
+process.on("SIGTERM", () => forwardSignal("SIGTERM"));
 
 child.on("exit", (code) => {
   process.exit(code ?? 0);
+});
+
+child.on("error", (error) => {
+  console.error("Failed to start dev processes.", error);
+  process.exit(1);
 });
