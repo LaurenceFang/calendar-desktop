@@ -2,11 +2,7 @@ import { app, BrowserWindow } from "electron";
 import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 
-import { APP_NAME } from "@calendar/shared";
-
 const devServerUrl = "http://localhost:5173";
-
-app.setName(APP_NAME);
 
 const ensureAppDirectories = () => {
   const userDataDir = app.getPath("userData");
@@ -42,7 +38,9 @@ const createWindow = () => {
   }
 };
 
-app.whenReady().then(() => {
+const startApp = async () => {
+  const { APP_NAME } = await import("@calendar/shared");
+  app.setName(APP_NAME);
   ensureAppDirectories();
   createWindow();
 
@@ -51,6 +49,10 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+};
+
+app.whenReady().then(() => {
+  void startApp();
 });
 
 app.on("window-all-closed", () => {

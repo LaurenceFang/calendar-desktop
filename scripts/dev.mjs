@@ -28,6 +28,7 @@ const env = {
 };
 
 const command =
+  "npx pnpm --filter @calendar/shared build && " +
   'npx pnpm exec concurrently -k -n api,web,desktop -c "green,cyan,magenta" ' +
   '"npx pnpm --filter @calendar/api dev" ' +
   '"npx pnpm --filter @calendar/web dev" ' +
