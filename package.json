@@ -1,0 +1,19 @@
+{
+  "name": "calendar-desktop",
+  "private": true,
+  "packageManager": "pnpm@9.12.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web,desktop -c green,cyan,magenta \"pnpm --filter @calendar/api dev\" \"pnpm --filter @calendar/web dev\" \"pnpm --filter @calendar/desktop dev\"",
+    "build": "pnpm -r build",
+    "clean": "rimraf apps/*/dist packages/*/dist"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.5.4"
+  }
+}
