@@ -5,7 +5,7 @@ Local-only Windows-targeted desktop calendar app bootstrap. This repo includes:
 - Electron desktop shell (`apps/desktop`)
 - React web UI (`apps/web`)
 - Express API (`apps/api`)
-- Shared types package (`packages/shared`)
+- Shared types package (`packages/shared`, CommonJS build)
 
 ## Prerequisites
 
@@ -15,13 +15,13 @@ Local-only Windows-targeted desktop calendar app bootstrap. This repo includes:
 ## Install
 
 ```powershell
-pnpm install
+npx pnpm install
 ```
 
 ## Run (Dev)
 
 ```powershell
-pnpm dev
+npx pnpm dev
 ```
 
 This will start:
@@ -63,10 +63,10 @@ Build outputs:
 
 ## Troubleshooting (Windows)
 
-- **Port already in use**: close any process using 3101 or 5173, then re-run `pnpm dev`.
+- **Port already in use**: close any process using 3101 or 5173, then re-run `npx pnpm dev`.
 - **Electron window is blank**: ensure the web dev server is running on `http://localhost:5173`.
 - **PowerShell execution policies**: if scripts are blocked, run PowerShell as Administrator and allow signed scripts, or use `cmd`.
 
 ## Stopping Processes
 
-- In the terminal running `pnpm dev`, press `Ctrl + C` once. `concurrently` will stop all processes.
+- In the terminal running `npx pnpm dev`, press `Ctrl + C` once. `concurrently` will stop all processes.

@@ -4,7 +4,11 @@
     "module": "CommonJS",
     "outDir": "dist",
     "rootDir": "src",
-    "types": ["node", "electron"]
+    "types": ["node", "electron"],
+    "paths": {
+      "@calendar/shared": ["../../packages/shared/dist/index.d.ts"]
+    }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["../../packages/shared/src/**/*"]
 }
