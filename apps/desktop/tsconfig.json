@@ -6,7 +6,7 @@
     "rootDir": "src",
     "types": ["node", "electron"],
     "paths": {
-      "@calendar/shared": ["../../packages/shared/dist/index.d.ts"]
+      "@calendar/shared": ["../../packages/shared/dist/types/index.d.ts"]
     }
   },
   "include": ["src"],
