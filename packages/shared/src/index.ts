@@ -35,3 +35,29 @@ export const EventCreateInputSchema = z.object({
 });
 
 export type EventCreateInput = z.infer<typeof EventCreateInputSchema>;
+
+export const EventUpdateInputSchema = z.object({
+  title: z.string().min(1),
+  start_at: z.string().datetime(),
+  end_at: z.string().datetime(),
+  timezone: z.string(),
+  location: z.string().nullable().optional(),
+  notes: z.string().nullable().optional(),
+  color: z.string().nullable().optional()
+});
+
+export type EventUpdateInput = z.infer<typeof EventUpdateInputSchema>;
+
+export const OccurrenceSchema = z.object({
+  id: z.string(),
+  event_id: z.string(),
+  title: z.string(),
+  start_at: z.string(),
+  end_at: z.string(),
+  timezone: z.string().nullable().optional(),
+  location: z.string().nullable().optional(),
+  notes: z.string().nullable().optional(),
+  color: z.string().nullable().optional()
+});
+
+export type Occurrence = z.infer<typeof OccurrenceSchema>;

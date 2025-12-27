@@ -18,7 +18,7 @@ Local-only Windows-targeted desktop calendar app bootstrap. This repo includes:
 npx pnpm install
 ```
 
-## Run (Dev)
+## How to run (Dev)
 
 ```powershell
 npx pnpm dev
@@ -34,7 +34,7 @@ This will start:
 
 ## Where data is stored
 
-The SQLite database lives under the Electron user data directory:
+The SQLite database lives under the Electron `userData` directory:
 
 - `db/schedule.db`
 
