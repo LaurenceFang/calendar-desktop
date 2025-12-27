@@ -28,11 +28,11 @@ const env = {
 };
 
 const command =
-  "npx pnpm --filter @calendar/shared build && " +
-  'npx pnpm exec concurrently -k -n api,web,desktop -c "green,cyan,magenta" ' +
-  '"npx pnpm --filter @calendar/api dev" ' +
-  '"npx pnpm --filter @calendar/web dev" ' +
-  '"npx pnpm --filter @calendar/desktop dev"';
+  "pnpm --filter @calendar/shared build && " +
+  'pnpm exec concurrently -k -n api,web,desktop -c "green,cyan,magenta" ' +
+  '"pnpm --filter @calendar/api dev" ' +
+  '"pnpm --filter @calendar/web dev" ' +
+  '"pnpm --filter @calendar/desktop dev"';
 
 const child = spawn(command, {
   shell: true,

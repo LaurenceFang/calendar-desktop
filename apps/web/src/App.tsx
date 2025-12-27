@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { DateSelectArg, DatesSetArg, EventApi, EventClickArg, EventInput } from "@fullcalendar/core";
-import { format, formatISO } from "date-fns";
+import { format } from "date-fns";
 import { Calendar, ChevronLeft, ChevronRight, Plus, Search } from "lucide-react";
 import { toast, Toaster } from "sonner";
 
@@ -73,14 +73,6 @@ const toInputValue = (iso: string) => {
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(
     date.getHours()
   )}:${pad(date.getMinutes())}`;
-};
-
-const fromInputValue = (value: string) => {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) {
-    throw new Error("Invalid date.");
-  }
-  return date.toISOString();
 };
 
 const formatRangeLabel = (start: Date, end: Date) => {
@@ -176,8 +168,8 @@ const App = () => {
 
   const handleDatesSet = (info: DatesSetArg) => {
     setCurrentRange({
-      start: formatISO(info.start),
-      end: formatISO(info.end)
+      start: info.start.toISOString(),
+      end: info.end.toISOString()
     });
     setCurrentTitle(info.view.title);
   };
@@ -269,10 +261,22 @@ const App = () => {
       if (!formState.startAt || !formState.endAt) {
         throw new Error("Start and end are required.");
       }
+      const trimmedTitle = formState.title.trim();
+      const startDate = new Date(formState.startAt);
+      if (Number.isNaN(startDate.getTime())) {
+        throw new Error("Start time is invalid.");
+      }
+      let endDate = new Date(formState.endAt);
+      if (Number.isNaN(endDate.getTime())) {
+        throw new Error("End time is invalid.");
+      }
+      if (endDate <= startDate) {
+        endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
+      }
       const payloadBase: EventCreateInput = {
-        title: formState.title,
-        start_at: fromInputValue(formState.startAt),
-        end_at: fromInputValue(formState.endAt),
+        title: trimmedTitle.length > 0 ? trimmedTitle : "Untitled event",
+        start_at: startDate.toISOString(),
+        end_at: endDate.toISOString(),
         timezone: timeZone,
         location: formState.location || undefined,
         notes: formState.notes || undefined,
