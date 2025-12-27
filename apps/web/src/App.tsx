@@ -43,9 +43,6 @@ import {
   TooltipTrigger
 } from "./components/ui/tooltip";
 
-import "@fullcalendar/core/index.css";
-import "@fullcalendar/daygrid/index.css";
-import "@fullcalendar/timegrid/index.css";
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
