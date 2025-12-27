@@ -27,9 +27,12 @@ const env = {
   APP_USER_DATA_DIR: userDataDir
 };
 
+const npxCommand = process.platform === "win32" ? "npx.cmd" : "npx";
+
 const child = spawn(
-  "pnpm",
+  npxCommand,
   [
+    "pnpm",
     "exec",
     "concurrently",
     "-k",
