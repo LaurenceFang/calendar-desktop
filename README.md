@@ -24,6 +24,8 @@ npx pnpm install
 npx pnpm dev
 ```
 
+Use `npx pnpm dev` (not `pnpm dev`) so the repo works even when pnpm is not on your PATH.
+
 This will start:
 
 - API on `http://localhost:3101`
