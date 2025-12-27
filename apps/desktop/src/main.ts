@@ -1,8 +1,25 @@
 import { app, BrowserWindow } from "electron";
-import { existsSync } from "node:fs";
+import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 
+import { APP_NAME } from "@calendar/shared";
+
 const devServerUrl = "http://localhost:5173";
+
+app.setName(APP_NAME);
+
+const ensureAppDirectories = () => {
+  const userDataDir = app.getPath("userData");
+  const directories = ["db", "imports", "exports", "logs"].map((dir) =>
+    join(userDataDir, dir)
+  );
+
+  for (const directory of directories) {
+    mkdirSync(directory, { recursive: true });
+  }
+
+  process.env.APP_USER_DATA_DIR = userDataDir;
+};
 
 const createWindow = () => {
   const window = new BrowserWindow({
@@ -26,6 +43,7 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
+  ensureAppDirectories();
   createWindow();
 
   app.on("activate", () => {

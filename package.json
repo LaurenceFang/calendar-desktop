@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently -k -n api,web,desktop -c green,cyan,magenta \"pnpm --filter @calendar/api dev\" \"pnpm --filter @calendar/web dev\" \"pnpm --filter @calendar/desktop dev\"",
+    "dev": "node scripts/dev.mjs",
     "build": "pnpm -r build",
     "clean": "rimraf apps/*/dist packages/*/dist"
   },
