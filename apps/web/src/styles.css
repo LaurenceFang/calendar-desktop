@@ -1,58 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  font-family: "Segoe UI", system-ui, sans-serif;
-  color: #1b1b1b;
-  background: #f5f7fb;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #0f172a;
+  background: #eef1f7;
 }
 
 body {
   margin: 0;
+  background: #eef1f7;
 }
 
-.app {
-  max-width: 720px;
-  margin: 48px auto;
-  padding: 32px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+#root {
+  min-height: 100vh;
 }
 
-.header h1 {
-  margin: 0 0 8px;
-  font-size: 28px;
+.fc {
+  font-family: inherit;
 }
 
-.header p {
-  margin: 0;
-  color: #4b5563;
-}
-
-.panel {
-  margin-top: 24px;
-  padding: 20px;
-  background: #f9fafb;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-}
-
-.panel h2 {
-  margin-top: 0;
-}
-
-dl {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  row-gap: 12px;
-  column-gap: 16px;
-  margin: 0;
-}
-
-dt {
+.fc .fc-toolbar-title {
+  font-size: 1.15rem;
   font-weight: 600;
-  color: #374151;
+  color: #1f2937;
 }
 
-dd {
-  margin: 0;
-  color: #111827;
+.fc .fc-button {
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: none;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+.fc .fc-scrollgrid,
+.fc .fc-scrollgrid-section-header,
+.fc .fc-scrollgrid-section-body {
+  border-color: #e6e8f0;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: #e6e8f0;
+}
+
+.fc .fc-timegrid-slot {
+  border-color: #eff1f6;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #475569;
+  font-weight: 500;
+}
+
+.fc .fc-event {
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.fc .fc-daygrid-event-dot {
+  border-color: currentColor;
+}
+
+.fc .fc-timegrid-event {
+  border-radius: 12px;
+}
+
+.fc .fc-col-header-cell {
+  background: #f8fafc;
+}
+
+.fc .fc-day-today {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.fc .fc-timegrid-now-indicator-line {
+  border-color: #ef4444;
+}
+
+.fc .fc-timegrid-now-indicator-arrow {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.fc .fc-highlight {
+  background: rgba(148, 163, 184, 0.2);
 }
